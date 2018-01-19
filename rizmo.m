@@ -37,7 +37,17 @@ end
 % computing average face
 [avgVector, avgFace] = averageFace(X);
 grayAvgFace = mat2gray(avgFace);
-imshow(grayAvgFace);
+subplot(1, 3, 1), imshow(grayAvgFace);
+
+% computing mean subtraction face
+XMeanSubtraction = zeros(trainAddressesLength, imageSize());
+
+for i = 1:trainAddressesLength
+    XMeanSubtraction(i, :) = X(i,:) - avgVector;
+end
+
+subplot(1, 3, 3), imshow(reshape(mat2gray(XMeanSubtraction(100, :)), [sqrt(imageSize()), sqrt(imageSize())]));
+
 % computing eigenface
 [U, S, V] = svd(XMeanSubtraction);
 VT = V';
