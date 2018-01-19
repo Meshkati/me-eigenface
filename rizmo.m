@@ -38,3 +38,7 @@ end
 [avgVector, avgFace] = averageFace(X);
 grayAvgFace = mat2gray(avgFace);
 imshow(grayAvgFace);
+% computing eigenface
+[U, S, V] = svd(XMeanSubtraction);
+VT = V';
+subplot(1, 3, 2), imshow(reshape(mat2gray(VT(1, :)), [sqrt(imageSize()), sqrt(imageSize())]));
