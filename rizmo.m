@@ -33,3 +33,8 @@ for i = 1:testAddressesLength
     tempVector = tempMatrix(:);
     X_test(i, :) = tempVector;
 end
+
+% computing average face
+[avgVector, avgFace] = averageFace(X);
+grayAvgFace = mat2gray(avgFace);
+imshow(grayAvgFace);
