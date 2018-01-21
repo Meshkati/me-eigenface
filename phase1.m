@@ -74,3 +74,16 @@ projected = innerDot' * PCAM(:, 1)';
 hold on
 plot(projected(:, 1) , projected(:, 2) + Mean(2), 'g.');
 
+
+% recunstrocting data points
+Mrecon = Mscore * PCAM';
+for i=1:2000
+    Mrecon(i, :) = Mrecon(i, :) + Mean;
+end
+
+figure, plot(Mrecon(:, 1), Mrecon(:, 2), '.');
+% computing mean square error
+dif = MC - Mrecon;
+mse = norm(dif, 'fro')
+
+title(strcat('Reconstrocted, MSE = ', num2str(mse)));
