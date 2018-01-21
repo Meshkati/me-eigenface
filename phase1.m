@@ -49,3 +49,28 @@ subplot(2, 2, 1), plot(projected1(:, 1) + C1Mean(1) , projected1(:, 2) + C1Mean(
 hold on
 subplot(2, 2, 2), plot(projected2(:, 1) + C2Mean(1) , projected2(:, 2) + C2Mean(2) , 'g.');
 
+
+% merging 2 classes
+MC = [C1; C2];
+[PCAM, Mscore, Mlatent] = pca(MC);
+Mean = mean(MC);
+figure, plot(MC(:, 1), MC(:, 2), '.');
+Mxt = linspace(0, 30);
+Myt = linspace(-20, 20);
+Ma = PCAM(2, 1) / PCAM(1, 1);
+Mb = PCAM(2, 2) / PCAM(1, 2);
+
+% hold on
+% plot(Mxt, (Ma * (Mxt - Mean(1))) + Mean(2));
+
+innerDot = zeros(1, 2000);
+
+for i=1:2000
+    innerDot(i) = dot(MC(i, :), PCAM(:, 1));
+end
+
+projected = innerDot' * PCAM(:, 1)';
+
+hold on
+plot(projected(:, 1) , projected(:, 2) + Mean(2), 'g.');
+
