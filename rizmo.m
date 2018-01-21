@@ -60,9 +60,18 @@ for i = 1:10
 end
 
 % computing low-rank approximation
-XMin = zeros(1, 200)
-for i=1:200
-    XMin(i) = lowrank(X, i);
-end
+% this process take a while to proceed, so I've commented this part of code
+% uncomment to see the result
 
-figure, plot(XMin)
+% XMin = zeros(1, 200)
+% for i=1:200
+%     XMin(i) = lowrank(X, i);
+% end
+% 
+% figure, plot(XMin)
+
+
+% computing eigenface features
+
+F = eigenfacefeature(X, 10);
+F_test = eigenfacefeature(X_test, 10);
