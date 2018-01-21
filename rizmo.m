@@ -51,7 +51,7 @@ subplot(3, 5, 2), imshow(reshape(mat2gray(XMeanSubtraction(100, :)), [sqrt(image
 title('100th Mean Subtraction face');
 
 % computing eigenface
-[U, S, V] = svd(XMeanSubtraction);
+[U, S, V] = svd(X);
 VT = V';
 
 for i = 1:10
