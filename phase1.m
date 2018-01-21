@@ -11,9 +11,6 @@ C2 = mvnrnd(MU2, SIGMA, 1000);
 PCA1 = pca(C1);
 PCA2 = pca(C2);
 
-v1 = ones(1, 1000);
-v2 = ones(1, 1000);
-
 C1Mean = mean(C1)
 C2Mean = mean(C2)
 
@@ -34,3 +31,21 @@ subplot(2, 2, 2), plot(xt, (a2 * (xt - C2Mean(1)) ) + C2Mean(2) , xt, ( b2 * (xt
 title('Class 2');
 hold on
 subplot(2, 2, 2), plot(C2(:, 1), C2(:, 2), '.');
+
+% project data on the PCA line
+innerDot1 = zeros(1, 1000);
+innerDot2 = zeros(1, 1000);
+
+for i=1:1000
+    innerDot1(i) = dot(C1(i, :), PCA1(:, 1));
+    innerDot2(i) = dot(C2(i, :), PCA2(:, 1));
+end
+
+projected1 = innerDot1' * PCA1(:, 1)';
+projected2 = innerDot2' * PCA2(:, 1)';
+
+hold on
+subplot(2, 2, 1), plot(projected1(:, 1) + C1Mean(1) , projected1(:, 2) + C1Mean(2) , 'g.');
+hold on
+subplot(2, 2, 2), plot(projected2(:, 1) + C2Mean(1) , projected2(:, 2) + C2Mean(2) , 'g.');
+
