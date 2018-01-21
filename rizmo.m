@@ -59,3 +59,10 @@ for i = 1:10
     title(strcat(int2str(i), ' th Eigenface'));
 end
 
+% computing low-rank approximation
+XMin = zeros(1, 200)
+for i=1:200
+    XMin(i) = lowrank(X, i);
+end
+
+figure, plot(XMin)
